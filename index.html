@@ -3,26 +3,33 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>iChecker</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+    
     <style>
 
     </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
   </head>
+  
   <body>
     <main>
-      <section class="main container">
+      <section class="main container-sm" pt-3>
         <div>
-        <form>
-          <label id="principal">
-            Principal: <input type="number">
-          </label>
-          <label id="final">
-            Final: <input type="number">
-          </label>
-          <button class="check-interest">Check</button>
-        </form>
-        <p>Interest Amount: GHS <input class="interest-amount" size="4" disabled></p>
-        <p>Percentage Interest: <input class="interest-percent" size="4" disabled>%</p>
+          <form>
+            <label id="principal" class="row">
+              Principal: <input type="number" size="4">
+            </label>
+            <label id="final" class="row">
+              Final: <input type="number" size="4">
+            </label>
+            <button class="check-interest row">Check</button>
+          </form>
+          <p class="row"><span class="col-8">Interest Amount: GHS</span><input class="interest-amount col-4" size="4" disabled></p>
+          <p class="row"><span class="col-8">Percentage Interest:</span><input class="interest-percent col-4" size="4" disabled></p>
         </div>
       </section>
     </main>
@@ -46,7 +53,7 @@
       const intVal = Math.abs(view.principal.value - view.final.value);
       const intPercent = (intVal / view.principal.value) * 100;
       view.interestAmount.value = intVal.toFixed(2);
-      view.interestPercent.value = intPercent.toFixed(2);
+      view.interestPercent.value = `${intPercent.toFixed(2)}%`;
       w.alert("Check Over");
     }
     
