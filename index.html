@@ -1,67 +1,136 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>iChecker</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
-    
-    <style>
-      .check-interest {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
+﻿<!DOCTYPE html>
 
-    </style>
-    
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>iChecker</title>
+
+    <link rel="icon" href="img/illustration-calculator-machine_53876-5566.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-  </head>
-  
-  <body>
-    <main>
-      <section class="main container-sm pt-3 m-2">
-        <div>
-          <form>
-            <label id="principal" class="row">
-              Principal: <input type="number" size="4">
-            </label>
-            <label id="final" class="row">
-              Final: <input type="number" size="4">
-            </label>
-            <button class="check-interest row">Check</button>
-          </form>
-          <p class="row"><span class="col-8">Interest Amount: GHS</span><input class="interest-amount col-4" size="4" disabled></p>
-          <p class="row"><span class="col-8">Percentage Interest:</span><input class="interest-percent col-4" size="4" disabled></p>
-        </div>
-      </section>
+
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        main.container {
+            max-width: 720px;
+        }
+        .input-area span {
+            padding: 0;
+        }
+        .input-area label {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .input-form input {
+            border-radius: 3px;
+        }
+        .input-form button {
+            margin-left: 25%;
+            margin-right: 25%;
+            width: 50%;
+            justify-content: center;
+        }
+        .check-interest {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .results-area input {
+            border-radius: 3px;
+        }
+
+            .results-area input:active {
+                border-color: rgb(98 159 239);
+            }
+
+        .results-area p span {
+            padding: 0;
+        }
+    </style>
+
+
+</head>
+<body>
+    <main class="container main container-sm pt-3">
+        <section class="container p-1">
+            <div class="input-area">
+                <form class="input-form">
+                    <label id="principal" class="row">
+                        <span class="col-4">Principal: </span><input class="col-8"type="number" size="4" autofocus>
+                    </label>
+                    <label id="final" class="row">
+                        <span class="col-4">Final: </span><input class="col-8" type="number" size="4">
+                    </label>
+                    <button class="check-interest btn btn-primary row">Check</button>
+                </form>
+            </div>
+            <div class="results-area">
+                <p class="row"><span class="col-8">Interest Amount:</span><input class="interest-amount col-4" size="4" disabled></p>
+                <p class="row"><span class="col-8">Percentage Interest:</span><input class="interest-percent col-4" size="4" disabled></p>
+            </div>
+            <div class="history-area">
+                <table>                    
+                        <th class="date-checked">
+
+                        </th>
+                        <td>
+
+                        </td>                    
+                </table>
+            </div>
+        </section>
     </main>
-    
+
     <script>
-    const w = window;
-    const d = w.document;
-    
-    const view = {
-      principal: d.querySelector("#principal input"),
-      final: d.querySelector("#final input"),
-      checkBtn: d.querySelector(".check-interest"),
-      interestAmount: d.querySelector(".interest-amount"),
-      interestPercent: d.querySelector(".interest-percent")
-    }
-    
-    view.checkBtn.addEventListener("click", checkInterest);
-    
-    function checkInterest(event) {
-      event.preventDefault();
-      const intVal = Math.abs(view.principal.value - view.final.value);
-      const intPercent = (intVal / view.principal.value) * 100;
-      view.interestAmount.value = intVal.toFixed(2);
-      view.interestPercent.value = `${intPercent.toFixed(2)}%`;
-      w.alert("Check Over");
-    }
-    
- 
+        const w = window;
+        const d = w.document;
+
+        const view = {
+            principal: d.querySelector("#principal input"),
+            final: d.querySelector("#final input"),
+            checkBtn: d.querySelector(".check-interest"),
+            interestAmount: d.querySelector(".interest-amount"),
+            interestPercent: d.querySelector(".interest-percent")
+        }
+
+        //for (element of [view.principal, view.final]) {
+        //    element.addEventListener("focus", styleElement, false);
+        //    element.addEventListener("blur", unStyleElement, false);
+        //}
+        view.checkBtn.addEventListener("click", checkInterest);
+
+        //function styleElement(event) {
+        //    //event.preventDefault();
+        //    console.log(event.target);
+        //    event.target.style.borderColor = "rgb(13, 110, 253)";
+        //}
+
+        //function unStyleElement(event) {
+        //    //event.preventDefault();
+        //    console.log(event.target);
+        //    event.target.style.borderColor = "";
+        //}
+
+        function checkInterest(event) {
+            event.preventDefault();
+            const intVal = Math.abs(view.principal.value - view.final.value);
+            const intPercent = (intVal / view.principal.value) * 100;
+            view.interestAmount.value = `${intVal.toFixed(2)} GHS`;
+            view.interestPercent.value = `${intPercent.toFixed(2)}%`;
+            w.alert("Check Over");
+        }
+
+        function createTable() {
+
+        }
     </script>
-  <body>
+</body>
 </html>
